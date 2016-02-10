@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    RAC(self.label, text) = [[[[
+    id x = [[[[
     [self.button rac_signalForControlEvents:UIControlEventTouchUpInside]
     scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
         return [xs arrayByAddingObject:x];
@@ -31,6 +31,8 @@
     }]
     takeUntil:[[self.button rac_signalForControlEvents:UIControlEventTouchUpInside] throttle:0.25]]
     repeat];
+    
+    [self.label rac_liftSelector:@selector(setText:) withSignals:x, nil];
 }
 
 @end
