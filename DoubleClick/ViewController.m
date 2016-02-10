@@ -9,25 +9,6 @@
 #import "ViewController.h"
 #import <ReactiveCocoa.h>
 
-@interface NSNumber (NT)
-
-- (instancetype)numberByAddingOne__nt;
-- (instancetype)numberByAddingNumber__nt:(NSNumber *)r;
-
-@end
-
-@implementation NSNumber (NT)
-
-- (instancetype)numberByAddingOne__nt {
-    return [self numberByAddingNumber__nt:@1];
-}
-
-- (instancetype)numberByAddingNumber__nt:(NSNumber *)r {
-    return @(self.doubleValue + r.doubleValue);
-}
-
-@end
-
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
@@ -42,11 +23,11 @@
     
     RAC(self.label, text) = [[[[
     [self.button rac_signalForControlEvents:UIControlEventTouchUpInside]
-    scanWithStart:@0 reduce:^id(NSNumber *x, id _) {
-        return [x numberByAddingOne__nt];
+    scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
+        return [xs arrayByAddingObject:x];
     }]
-    map:^id(id x) {
-        return [NSString stringWithFormat:@"Clicks: %@", x];
+    map:^id(NSArray *xs) {
+        return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
     }]
     takeUntil:[[self.button rac_signalForControlEvents:UIControlEventTouchUpInside] throttle:0.25]]
     repeat];
