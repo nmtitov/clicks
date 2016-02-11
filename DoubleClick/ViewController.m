@@ -32,7 +32,7 @@
         return xs.count == 1;
     }]
     map:^id(NSArray *xs) {
-      return [NSString stringWithFormat:@"Click"];
+        return [NSString stringWithFormat:@"Click"];
     }]
     takeLast:1]
     repeat];
@@ -47,7 +47,7 @@
         return xs.count >= 2;
     }]
     map:^id(NSArray *xs) {
-      return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
+        return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
     }]
     takeLast:1]
     repeat];
