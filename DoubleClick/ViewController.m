@@ -31,7 +31,7 @@
     RACSignal *clicks = [[touches filter:^BOOL(NSArray *xs) {
         return xs.count >= 2;
     }] map:^id(NSArray *xs) {
-        return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
+        return [NSString stringWithFormat:@"Clicks: %lu", (long unsigned)xs.count];
     }];
 
     RACSignal *clear = [[[RACSignal merge:@[click, clicks]] throttle:1] mapReplace:nil];
