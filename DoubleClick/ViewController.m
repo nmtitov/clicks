@@ -34,7 +34,7 @@
         return [NSString stringWithFormat:@"Clicks: %lu", (long unsigned)xs.count];
     }];
 
-    RACSignal *clear = [[[RACSignal merge:@[click, clicks]] throttle:1] mapReplace:nil];
+    RACSignal *clear = [[touches throttle:1] mapReplace:nil];
     
     RAC(self.label, text) = [RACSignal merge:@[click, clicks, clear]];
 }
