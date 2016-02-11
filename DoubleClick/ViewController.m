@@ -22,42 +22,21 @@
     [super viewDidLoad];
     
     RACSignal *touch = [self.button rac_signalForControlEvents:UIControlEventTouchUpInside];
+    RACSignal *touches = [[touch takeUntil:[touch throttle:0.25]] collect];
     
-    RACSignal *click = [[[[[[
-    touch scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
-        return [xs arrayByAddingObject:x];
-    }]
-    takeUntil:[touch throttle:0.25]]
-    filter:^BOOL(NSArray *xs) {
+    RACSignal *click = [[[touches filter:^BOOL(NSArray *xs) {
         return xs.count == 1;
-    }]
-    map:^id(NSArray *xs) {
-        return [NSString stringWithFormat:@"Click"];
-    }]
-    takeLast:1]
-    repeat];
+    }] mapReplace:@"Click"] repeat];
 
-    RACSignal *clicks = [[[[[[
-    touch
-    scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
-        return [xs arrayByAddingObject:x];
-    }]
-    takeUntil:[touch throttle:0.25]]
-    filter:^BOOL(NSArray *xs) {
+    RACSignal *clicks = [[[touches filter:^BOOL(NSArray *xs) {
         return xs.count >= 2;
-    }]
-    map:^id(NSArray *xs) {
+    }] map:^id(NSArray *xs) {
         return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
-    }]
-    takeLast:1]
-    repeat];
+    }] repeat];
 
-    RACSignal *clear = [[[RACSignal merge:@[click, clicks]] throttle:1] map:^id(id value) {
-        return nil;
-    }];
+    RACSignal *clear = [[[RACSignal merge:@[click, clicks]] throttle:1] mapReplace:nil];
     
     RAC(self.label, text) = [RACSignal merge:@[click, clicks, clear]];
-    
 }
 
 @end
