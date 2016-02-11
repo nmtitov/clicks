@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    RAC(self.label, text) = [[[[[
+    RACSignal *clicks = [[[[[
     [self.button rac_signalForControlEvents:UIControlEventTouchUpInside]
     scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
         return [xs arrayByAddingObject:x];
@@ -32,6 +32,13 @@
     }]
     takeLast:1]
     repeat];
+
+    RACSignal *clear = [[clicks throttle:1] map:^id(id value) {
+        return nil;
+    }];
+    
+    RAC(self.label, text) = [RACSignal merge:@[clicks, clear]];
+    
 }
 
 @end
