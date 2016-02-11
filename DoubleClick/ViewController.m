@@ -27,10 +27,10 @@
     touch scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
         return [xs arrayByAddingObject:x];
     }]
+    takeUntil:[touch throttle:0.25]]
     filter:^BOOL(NSArray *xs) {
         return xs.count == 1;
     }]
-    takeUntil:[touch throttle:0.25]]
     map:^id(NSArray *xs) {
       return [NSString stringWithFormat:@"Click"];
     }]
@@ -42,10 +42,10 @@
     scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
         return [xs arrayByAddingObject:x];
     }]
+    takeUntil:[touch throttle:0.25]]
     filter:^BOOL(NSArray *xs) {
         return xs.count >= 2;
     }]
-    takeUntil:[touch throttle:0.25]]
     map:^id(NSArray *xs) {
       return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
     }]
