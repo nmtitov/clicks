@@ -28,9 +28,7 @@
     filter:^BOOL(NSArray *xs) {
         return xs.count == 1;
     }]
-    map:^id(NSArray *xs) {
-        return [NSString stringWithFormat:@"Click"];
-    }]
+    mapReplace:@"Click"]
     repeat];
 
     RACSignal *clicks = [[[[[
@@ -43,12 +41,9 @@
     }]
     repeat];
 
-    RACSignal *clear = [[[RACSignal merge:@[click, clicks]] throttle:1] map:^id(id value) {
-        return nil;
-    }];
+    RACSignal *clear = [[[RACSignal merge:@[click, clicks]] throttle:1] mapReplace:nil];
     
     RAC(self.label, text) = [RACSignal merge:@[click, clicks, clear]];
-    
 }
 
 @end
