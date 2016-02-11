@@ -13,6 +13,7 @@
 		6F2CFF031C68CAEE00508620 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F2CFF011C68CAEE00508620 /* Main.storyboard */; };
 		6F2CFF051C68CAEE00508620 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F2CFF041C68CAEE00508620 /* Assets.xcassets */; };
 		6F2CFF081C68CAEE00508620 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F2CFF061C68CAEE00508620 /* LaunchScreen.storyboard */; };
+		6F2CFF101C6CA54A00508620 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 6F2CFF0F1C6CA54A00508620 /* README.md */; };
 		8CDC9A170B0BC052F556E2DB /* libPods-DoubleClick.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8794E83F8DDF377D49410DA /* libPods-DoubleClick.a */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		6F2CFF041C68CAEE00508620 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F2CFF071C68CAEE00508620 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F2CFF091C68CAEE00508620 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6F2CFF0F1C6CA54A00508620 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A38FEBEC051E9E3A19B92D1A /* Pods-DoubleClick.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoubleClick.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoubleClick/Pods-DoubleClick.release.xcconfig"; sourceTree = "<group>"; };
 		F8794E83F8DDF377D49410DA /* libPods-DoubleClick.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DoubleClick.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 		6F2CFEF81C68CAEE00508620 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				6F2CFF0F1C6CA54A00508620 /* README.md */,
 				6F2CFEF91C68CAEE00508620 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -226,6 +229,7 @@
 			files = (
 				6F2CFF001C68CAEE00508620 /* ViewController.m in Sources */,
 				6F2CFEFD1C68CAEE00508620 /* AppDelegate.m in Sources */,
+				6F2CFF101C6CA54A00508620 /* README.md in Sources */,
 				6F2CFEFA1C68CAEE00508620 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
