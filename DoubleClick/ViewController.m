@@ -23,33 +23,24 @@
     
     RACSignal *touch = [self.button rac_signalForControlEvents:UIControlEventTouchUpInside];
     
-    RACSignal *click = [[[[[[
-    touch scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
-        return [xs arrayByAddingObject:x];
-    }]
-    takeUntil:[touch throttle:0.25]]
+    RACSignal *click = [[[[[
+    touch takeUntil:[touch throttle:0.25]] collect]
     filter:^BOOL(NSArray *xs) {
         return xs.count == 1;
     }]
     map:^id(NSArray *xs) {
         return [NSString stringWithFormat:@"Click"];
     }]
-    takeLast:1]
     repeat];
 
-    RACSignal *clicks = [[[[[[
-    touch
-    scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
-        return [xs arrayByAddingObject:x];
-    }]
-    takeUntil:[touch throttle:0.25]]
+    RACSignal *clicks = [[[[[
+    touch takeUntil:[touch throttle:0.25]] collect]
     filter:^BOOL(NSArray *xs) {
         return xs.count >= 2;
     }]
     map:^id(NSArray *xs) {
         return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
     }]
-    takeLast:1]
     repeat];
 
     RACSignal *clear = [[[RACSignal merge:@[click, clicks]] throttle:1] map:^id(id value) {
