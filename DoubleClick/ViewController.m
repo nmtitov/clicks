@@ -21,15 +21,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    RAC(self.label, text) = [[[[
+    RAC(self.label, text) = [[[[[
     [self.button rac_signalForControlEvents:UIControlEventTouchUpInside]
     scanWithStart:[NSArray new] reduce:^id(NSArray *xs, id x) {
         return [xs arrayByAddingObject:x];
     }]
-    map:^id(NSArray *xs) {
-        return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
-    }]
     takeUntil:[[self.button rac_signalForControlEvents:UIControlEventTouchUpInside] throttle:0.25]]
+    map:^id(NSArray *xs) {
+      return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
+    }]
+    takeLast:1]
     repeat];
 }
 
