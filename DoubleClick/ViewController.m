@@ -22,24 +22,17 @@
     [super viewDidLoad];
     
     RACSignal *touch = [self.button rac_signalForControlEvents:UIControlEventTouchUpInside];
+    RACSignal *touches = [[touch takeUntil:[touch throttle:0.25]] collect];
     
-    RACSignal *click = [[[[[
-    touch takeUntil:[touch throttle:0.25]] collect]
-    filter:^BOOL(NSArray *xs) {
+    RACSignal *click = [[[touches filter:^BOOL(NSArray *xs) {
         return xs.count == 1;
-    }]
-    mapReplace:@"Click"]
-    repeat];
+    }] mapReplace:@"Click"] repeat];
 
-    RACSignal *clicks = [[[[[
-    touch takeUntil:[touch throttle:0.25]] collect]
-    filter:^BOOL(NSArray *xs) {
+    RACSignal *clicks = [[[touches filter:^BOOL(NSArray *xs) {
         return xs.count >= 2;
-    }]
-    map:^id(NSArray *xs) {
+    }] map:^id(NSArray *xs) {
         return [NSString stringWithFormat:@"Clicks: %d", (int)xs.count];
-    }]
-    repeat];
+    }] repeat];
 
     RACSignal *clear = [[[RACSignal merge:@[click, clicks]] throttle:1] mapReplace:nil];
     
